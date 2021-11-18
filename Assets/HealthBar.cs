@@ -38,14 +38,14 @@ public class HealthBar : MonoBehaviour
     {
         if (currentHealth + _healPower > _maxHealth || currentHealth + _healPower == _maxHealth)
         {
-            currentHealth = _maxHealth;
+            resultHealth = _maxHealth;
         }
         else
         {
-            currentHealth += _healPower;
+            resultHealth = currentHealth += _healPower;
         }
-        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration * Time.deltaTime);
 
+        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration);
         currentHealth = resultHealth;
     }
 
@@ -59,7 +59,8 @@ public class HealthBar : MonoBehaviour
         {
             resultHealth = currentHealth - _damagePower;
         }
-        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration * Time.deltaTime);
+
+        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration);
         currentHealth = resultHealth;
     }
 }
