@@ -44,9 +44,7 @@ public class HealthBar : MonoBehaviour
         {
             currentHealth += _healPower;
         }
-        Debug.Log("Значение слайдера до изменения - " + _slider.value);
-        _slider.value = Mathf.MoveTowards(_slider.value, resultHealth, _animationDuration * Time.deltaTime);
-        Debug.Log("Значение слайдера после изменения - " + _slider.value);
+        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration * Time.deltaTime);
 
         currentHealth = resultHealth;
     }
@@ -61,9 +59,7 @@ public class HealthBar : MonoBehaviour
         {
             resultHealth = currentHealth - _damagePower;
         }
-        Debug.Log("Значение слайдера до изменения - " + _slider.value);
-        _slider.value = Mathf.MoveTowards(_slider.value, resultHealth, _animationDuration * Time.deltaTime);
-        Debug.Log("Значение слайдера после изменения - " + _slider.value);
+        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration * Time.deltaTime);
         currentHealth = resultHealth;
     }
 }
