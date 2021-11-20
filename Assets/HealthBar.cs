@@ -1,75 +1,37 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private float _minHealth;
-    [SerializeField] private float _maxHealth;
-    [SerializeField] private float _healPower;
-    [SerializeField] private float _damagePower;
     [SerializeField] private float _animationDuration;
-    [SerializeField] private ButtonController _buttonController;
+    [SerializeField] private Player _player;
 
-    [SerializeField] private Slider _slider;
+    private Slider _slider;
 
-    private float currentHealth;
-    private float resultHealth;
+    private void Start()
+    {
+        _slider = GetComponent<Slider>();
+    }
 
     private void OnEnable()
     {
-        _buttonController.HealButtonClicked += Heal;
-        _buttonController.DamageButtonClicked += TakeDamage;
+        _player.HealthChanged += StartChangeValue;
     }
 
     private void OnDisable()
     {
-        _buttonController.HealButtonClicked -= Heal;
-        _buttonController.DamageButtonClicked -= TakeDamage;
+        _player.HealthChanged -= StartChangeValue;
     }
 
-    private void Start()
+    private void StartChangeValue(float resultHealth)
     {
-        currentHealth = _slider.maxValue;
+        StartCoroutine(ChangeValue(resultHealth));
     }
 
-    public void Heal()
+    private IEnumerator ChangeValue(float resultHealth)
     {
-        if (currentHealth + _healPower > _maxHealth || currentHealth + _healPower == _maxHealth)
-        {
-            resultHealth = _maxHealth;
-        }
-        else
-        {
-            resultHealth = currentHealth += _healPower;
-        }
-
-        StartCoroutine(ChangeValue());
-        
-        currentHealth = resultHealth;
-    }
-
-    private void TakeDamage()
-    {
-        if (currentHealth - _damagePower < _minHealth || currentHealth - _damagePower == _minHealth)
-        {
-            resultHealth = _minHealth;
-        }
-        else
-        {
-            resultHealth = currentHealth - _damagePower;
-        }
-
-        StartCoroutine(ChangeValue());
-        
-        currentHealth = resultHealth;
-    }
-
-    private IEnumerator ChangeValue()
-    {
-        
         while (_slider.value != resultHealth)
         {
             _slider.value = Mathf.MoveTowards(_slider.value, resultHealth, _animationDuration * Time.deltaTime);
