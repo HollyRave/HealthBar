@@ -531,9 +531,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minHealth: 0
   _maxHealth: 100
-  _healPower: 20
-  _damagePower: 20
-  _animationDuration: 2
+  _healPower: 10
+  _damagePower: 10
+  _animationDuration: 70
   _buttonController: {fileID: 2040093491}
   _slider: {fileID: 928608003}
 --- !u!1 &1310365020

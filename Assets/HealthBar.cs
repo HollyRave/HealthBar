@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Slider))]
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private float _minHealth;
@@ -45,7 +46,8 @@ public class HealthBar : MonoBehaviour
             resultHealth = currentHealth += _healPower;
         }
 
-        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration);
+        StartCoroutine(ChangeValue());
+        
         currentHealth = resultHealth;
     }
 
@@ -60,7 +62,20 @@ public class HealthBar : MonoBehaviour
             resultHealth = currentHealth - _damagePower;
         }
 
-        _slider.value = Mathf.MoveTowards(currentHealth, resultHealth, _animationDuration);
+        StartCoroutine(ChangeValue());
+        
         currentHealth = resultHealth;
+    }
+
+    private IEnumerator ChangeValue()
+    {
+        
+        while (_slider.value != resultHealth)
+        {
+            _slider.value = Mathf.MoveTowards(_slider.value, resultHealth, _animationDuration * Time.deltaTime);
+            yield return null;
+        }
+
+        yield return null;
     }
 }
