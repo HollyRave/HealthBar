@@ -18,13 +18,11 @@ public class HealthCount : MonoBehaviour
     private void OnEnable()
     {
         _player.HealthChanged += ChangeText;
-        _player.CheckStartCountHealth += ChangeText;
     }
 
     private void OnDisable()
     {
         _player.HealthChanged -= ChangeText;
-        _player.CheckStartCountHealth -= ChangeText;
     }
 
     private void ChangeText(float health)
