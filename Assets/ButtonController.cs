@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
+    [SerializeField] private Button _healButton;
+    [SerializeField] private Button _damageButton;
+    
     public event UnityAction HealButtonClicked; 
     public event UnityAction DamageButtonClicked; 
 
-    [SerializeField] private Button _healButton;
-    [SerializeField] private Button _damageButton;
 
     private void OnEnable()
     {

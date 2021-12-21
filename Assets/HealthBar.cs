@@ -37,7 +37,5 @@ public class HealthBar : MonoBehaviour
             _slider.value = Mathf.MoveTowards(_slider.value, resultHealth, _animationDuration * Time.deltaTime);
             yield return null;
         }
-
-        yield return null;
     }
 }

@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    public event UnityAction<float> HealthChanged;
-
     [SerializeField] private float _minHealth;
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _healPower;
@@ -15,6 +13,8 @@ public class Player : MonoBehaviour
 
     private float _currentHealth;
 
+    public event UnityAction<float> HealthChanged;
+    
     private void Start()
     {
         _currentHealth = _maxHealth;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         HealthChanged?.Invoke(_currentHealth);
     }
 
-    private void TakeDamage()
+    public void TakeDamage()
     {
         _currentHealth = Mathf.Clamp(_currentHealth - _damagePower, _minHealth, _maxHealth);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class HealthCount : MonoBehaviour
+public class HealthCounter : MonoBehaviour
 {
     [SerializeField] private Player _player;
     
